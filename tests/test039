@@ -1,0 +1,3 @@
+// ReturnVoidRequired:
+void main() { boolean x; return x; }
+

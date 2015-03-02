@@ -1,0 +1,4 @@
+// VarDefined: defined as parameter
+void main() {}
+void foo(int x) { print x; }
+

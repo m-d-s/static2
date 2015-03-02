@@ -1,0 +1,3 @@
+// RelBinArgs: boolean < boolean
+void main() { boolean x; print x < x; }
+

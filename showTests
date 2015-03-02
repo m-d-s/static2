@@ -1,0 +1,22 @@
+#!/bin/bash
+
+for i in tests/test???
+do
+  echo "=============================="
+  echo $i:
+  echo "=============================="
+  cat $i
+  echo "--- Reference output ---------"
+  cat $i.ref
+  if [ ! -r $i.out ];
+  then
+    echo "--- No test output found -----";
+  elif [ -s $i.diff ];
+  then
+    echo "--- Differences found --------";
+    cat $i.diff;
+  else
+    echo "--- Test PASSED!!! -----------";
+  fi
+  echo ""
+done

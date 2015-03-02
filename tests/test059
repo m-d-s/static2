@@ -1,0 +1,3 @@
+// VarDefined: defined in local decl
+void main() { int x; print x; }
+

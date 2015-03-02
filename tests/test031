@@ -1,0 +1,3 @@
+// WhileBoolean: valid boolean argument
+void main() { boolean x; while (x) {} }
+

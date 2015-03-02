@@ -1,0 +1,12 @@
+Function
+  void
+  "main"
+  Block
+    Locals
+      int
+      VarIntro
+        "x"
+    Print boolean
+      Lte int
+        Id("x")
+        Id("x")

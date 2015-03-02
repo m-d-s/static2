@@ -1,0 +1,3 @@
+// WhileBoolean: invalid double argument
+void main() { double x; while (x) {} }
+

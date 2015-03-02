@@ -1,0 +1,3 @@
+// ArithBinArgsNumeric: int + double
+void main() { int x; double y; print x + y; }
+

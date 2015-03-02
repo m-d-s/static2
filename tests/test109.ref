@@ -1,0 +1,71 @@
+Function
+  int
+  "fact"
+  Formal
+    int
+    "n"
+  Block
+    If
+      Gt int
+        Id("n")
+        IntLit(0)
+      Block
+        Locals
+          int
+          InitVarIntro
+            "y"
+            Sub int
+              Id("n")
+              IntLit(1)
+        Locals
+          int
+          InitVarIntro
+            "z"
+            Call
+              "fact"
+              Id("y")
+        Print int
+          Id("y")
+        Print int
+          Id("z")
+        Return
+          Mul int
+            Id("n")
+            Id("z")
+      Return
+        Id("n")
+Function
+  void
+  "main"
+  Block
+    Locals
+      int
+      InitVarIntro
+        "i"
+        IntLit(0)
+    Locals
+      int
+      InitVarIntro
+        "t"
+        IntLit(0)
+    While
+      Lt int
+        Id("i")
+        IntLit(10)
+      Block
+        ExprStmt
+          Assign int
+            "t"
+            Add int
+              Id("t")
+              Call
+                "fact"
+                Id("i")
+        ExprStmt
+          Assign int
+            "i"
+            Add int
+              Id("i")
+              IntLit(1)
+    Print int
+      Id("t")

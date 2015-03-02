@@ -1,0 +1,15 @@
+Function
+  void
+  "main"
+  Block
+Function
+  void
+  "foo"
+  Formal
+    double
+    "x"
+  Block
+    Locals
+      int
+      VarIntro
+        "x"

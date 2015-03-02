@@ -1,0 +1,3 @@
+// LogBinArgsBoolean: boolean || int
+void main() { boolean x; int y; print x || y; }
+

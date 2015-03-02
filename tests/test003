@@ -1,0 +1,3 @@
+// MainVoid: main() should be a void function.
+int main() { return 1; }
+

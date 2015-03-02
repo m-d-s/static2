@@ -1,0 +1,13 @@
+Function
+  void
+  "main"
+  Block
+Function
+  double
+  "foo"
+  Formal
+    double
+    "x"
+  Block
+    Return
+      Id("x")

@@ -1,0 +1,15 @@
+Function
+  void
+  "main"
+  Block
+    ExprStmt
+      Call
+        "foo"
+        IntLit(1)
+Function
+  void
+  "foo"
+  Formal
+    int
+    "x"
+  Block

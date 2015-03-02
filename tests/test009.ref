@@ -1,0 +1,14 @@
+Function
+  void
+  "main"
+  Block
+Function
+  void
+  "foo"
+  Formal
+    int
+    "x"
+  Formal
+    double
+    "y"
+  Block

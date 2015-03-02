@@ -1,0 +1,3 @@
+// PrintArgument: int argument
+void main() { int x; print x; }
+

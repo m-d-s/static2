@@ -1,0 +1,3 @@
+// VarDefined: unbound reference nested inside if, while, and block
+void main() { boolean x; if (x) while (x) { print y; } }
+

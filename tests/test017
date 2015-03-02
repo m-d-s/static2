@@ -1,0 +1,4 @@
+// GlobalsInitialized: Global with wrong type of initializer.
+void main() {}
+boolean x = 1;
+

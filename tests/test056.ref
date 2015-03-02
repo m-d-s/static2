@@ -1,0 +1,15 @@
+Globals
+  int
+  InitVarIntro
+    "x"
+    IntLit(1)
+Function
+  void
+  "main"
+  Block
+    Locals
+      double
+      InitVarIntro
+        "x"
+        IntToDouble
+          IntLit(2)

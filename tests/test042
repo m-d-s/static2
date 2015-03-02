@@ -1,0 +1,4 @@
+// ReturnType: matching double type
+void main() { }
+double foo(double x) { return x; }
+

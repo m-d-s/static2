@@ -1,0 +1,3 @@
+// IfBoolean: invalid int argument
+void main() { int x; if (x) {} else {} }
+

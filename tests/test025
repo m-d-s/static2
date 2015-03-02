@@ -1,0 +1,3 @@
+// [Other]: make sure code checks for null false branch (no else)
+void main() { boolean x; if (x) {} }
+

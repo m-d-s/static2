@@ -1,0 +1,3 @@
+// MainDefined: A simple main program that does nothing.
+void main() {}
+

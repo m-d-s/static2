@@ -1,0 +1,4 @@
+// GlobalsInitialized: Global with initializer requiring a cast to int.
+void main() {}
+int x = 2.0;
+

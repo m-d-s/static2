@@ -1,0 +1,5 @@
+// VarDefined: defined as global, before
+void main() {}
+int x=1;
+void foo() { print x; }
+

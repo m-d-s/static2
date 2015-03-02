@@ -1,0 +1,4 @@
+// ReturnValueRequired:
+void main() {}
+int  foo()  { return; }
+

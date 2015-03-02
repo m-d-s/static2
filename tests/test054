@@ -1,0 +1,4 @@
+// LocalsUnique: duplicate use of name, also parameter
+void main() {}
+void foo(int x) { int x; }
+

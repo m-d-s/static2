@@ -1,0 +1,3 @@
+// ReturnVoidRequired: combination with while loop
+void main() { boolean x; while (x) return x; }
+

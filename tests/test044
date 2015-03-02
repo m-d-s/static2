@@ -1,0 +1,4 @@
+// ReturnType: matching int type
+void main() { }
+int foo(int x) { return x; }
+

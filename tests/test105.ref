@@ -1,0 +1,22 @@
+Function
+  void
+  "main"
+  Block
+    Locals
+      int
+      VarIntro
+        "x"
+    ExprStmt
+      Call
+        "foo"
+        IntToDouble
+          Id("x")
+Function
+  void
+  "foo"
+  Formal
+    double
+    "x"
+  Block
+    Print double
+      Id("x")

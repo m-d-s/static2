@@ -1,0 +1,4 @@
+// ReturnType: returning int from double function (cast required)
+void main() { }
+double foo(int x) { return x; }
+

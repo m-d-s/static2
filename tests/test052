@@ -1,0 +1,3 @@
+// LocalsUnique: duplicate use of name with extras
+void main() { int x, y, x; }
+

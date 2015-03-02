@@ -1,0 +1,4 @@
+// GlobalsInitialized: Global with an initializer.
+void main() {}
+int x = 1;
+

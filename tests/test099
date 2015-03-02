@@ -1,0 +1,3 @@
+void main() { int x; double y; foo(x, y); }
+void foo(int u, double v)  { }
+

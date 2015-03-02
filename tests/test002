@@ -1,0 +1,3 @@
+// MainDefined: A nonempty program that does not contain a definition of main.
+void foo() {}
+

@@ -1,0 +1,14 @@
+Function
+  void
+  "main"
+  Block
+    Locals
+      boolean
+      VarIntro
+        "x"
+    If
+      Id("x")
+      While
+        Id("x")
+        Block
+      Block

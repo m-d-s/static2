@@ -1,0 +1,21 @@
+int fact(int n) {
+  if (n>0) {
+    int y = n-1;
+    int z = fact(y);
+    print y;
+    print z;
+    return n*z;
+  } else
+    return n;
+}
+
+void main() {
+  int i=0;
+  int t=0;
+  while (i<10) {
+      t = t + fact(i);
+      i = i + 1;
+  }
+  print t;
+}
+

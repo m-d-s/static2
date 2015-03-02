@@ -1,0 +1,4 @@
+// LocalsUnique: duplicate use of name, also parameter of diff type
+void main() {}
+void foo(double x) { int x; }
+

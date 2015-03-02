@@ -1,0 +1,3 @@
+// RelBinArgs: int <= int
+void main() { int x; print x <= x; }
+

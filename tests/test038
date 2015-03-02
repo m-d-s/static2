@@ -1,0 +1,4 @@
+// ReturnValueRequired: combination with if statement, false-branch
+void main() {}
+boolean foo(boolean x) { if (x) {} else return; }
+

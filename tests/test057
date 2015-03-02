@@ -1,0 +1,4 @@
+// LocalsUnique: chaining same name over multiple definitions
+void main() {}
+void foo(int x) { int x=x; int x=x; int x=x; }
+

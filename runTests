@@ -1,0 +1,26 @@
+#!/bin/bash
+make
+let "count = 0"
+let "total = 0"
+for i in tests/test???
+do
+  echo -n "$i: "
+  let "total++"
+  java Static < $i > $i.out
+  if [ ! -r $i.out ];
+  then
+    echo "FAILED - no output"
+  else
+    diff $i.ref $i.out > $i.diff
+    if [ -s $i.diff ];
+    then
+      echo "FAILED"
+      cat $i.diff
+      echo ""
+    else
+      echo "PASSED"
+      let "count++"
+    fi
+  fi
+done
+echo "Passed $count/$total tests"

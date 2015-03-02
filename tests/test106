@@ -1,0 +1,3 @@
+void main() { boolean x; foo(x); }
+void foo(boolean x) { print x; }
+

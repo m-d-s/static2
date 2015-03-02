@@ -1,0 +1,10 @@
+Function
+  void
+  "main"
+  Block
+Globals
+  int
+  InitVarIntro
+    "x"
+    DoubleToInt
+      FloatLit(2.0)

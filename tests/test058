@@ -1,0 +1,3 @@
+// VarDefined: undefined variable
+void main() { print x; }
+

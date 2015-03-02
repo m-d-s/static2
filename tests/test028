@@ -1,0 +1,3 @@
+// [Other]: if inside if-then
+void main() { boolean x; if (x) if (x) {} else {} else {} }
+

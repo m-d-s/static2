@@ -1,0 +1,13 @@
+Function
+  void
+  "main"
+  Block
+    Locals
+      int
+      VarIntro
+        "x"
+    Locals
+      int
+      InitVarIntro
+        "y"
+        Id("x")

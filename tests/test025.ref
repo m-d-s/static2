@@ -1,0 +1,12 @@
+Function
+  void
+  "main"
+  Block
+    Locals
+      boolean
+      VarIntro
+        "x"
+    If
+      Id("x")
+      Block
+    [no else branch]

@@ -1,0 +1,4 @@
+// LocalsUnique: duplicate use of name, also global of diff type
+int x = 1;
+void main() { double x=2; }
+

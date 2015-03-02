@@ -1,0 +1,5 @@
+// GlobalsNoCalls: initializer includes a call.
+void main() {}
+int foo() { return 1; }
+int x = foo();
+

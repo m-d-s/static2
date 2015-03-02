@@ -1,0 +1,11 @@
+Function
+  void
+  "main"
+  Block
+    ExprStmt
+      Call
+        "foo"
+Function
+  void
+  "foo"
+  Block

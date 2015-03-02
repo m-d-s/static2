@@ -1,0 +1,3 @@
+// AssignTypes: double = boolean
+void main() { double x; boolean y; x = y; }
+

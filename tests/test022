@@ -1,0 +1,5 @@
+// GlobalsNoCalls: initializer includes a call with an operator.
+void main() {}
+boolean foo() { return x; }
+boolean x = foo() && foo();
+

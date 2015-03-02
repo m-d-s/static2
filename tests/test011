@@ -1,0 +1,5 @@
+// GlobalsUnique: Two globals, same name, different declarations.
+void main() {}
+int x=1;
+int x=2;
+

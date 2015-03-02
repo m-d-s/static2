@@ -1,0 +1,14 @@
+Function
+  void
+  "main"
+  Block
+Globals
+  int
+  InitVarIntro
+    "x"
+    IntLit(1)
+Globals
+  int
+  InitVarIntro
+    "y"
+    IntLit(2)

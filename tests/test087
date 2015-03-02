@@ -1,0 +1,3 @@
+// AssignTypes: double = int
+void main() { double x; int y; x = y; }
+

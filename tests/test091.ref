@@ -1,0 +1,13 @@
+Function
+  int
+  "f"
+  Block
+    Return
+      IntLit(1)
+Function
+  void
+  "main"
+  Block
+    Print int
+      Call
+        "f"

@@ -1,0 +1,3 @@
+// InitVarEntryType: cast to double
+void main() { int x; double y=x; }
+

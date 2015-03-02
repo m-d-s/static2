@@ -1,0 +1,14 @@
+Function
+  void
+  "main"
+  Block
+    Locals
+      double
+      VarIntro
+        "x"
+    Locals
+      int
+      InitVarIntro
+        "y"
+        DoubleToInt
+          Id("x")

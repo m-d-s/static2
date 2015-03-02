@@ -1,0 +1,13 @@
+Function
+  void
+  "main"
+  Block
+Function
+  void
+  "foo"
+  Formal
+    int
+    "x"
+  Block
+    Print int
+      Id("x")

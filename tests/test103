@@ -1,0 +1,3 @@
+void main() { double x; foo(x); }
+void foo(int x) { print x; }
+

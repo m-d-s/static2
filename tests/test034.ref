@@ -1,0 +1,10 @@
+Function
+  void
+  "main"
+  Block
+    Locals
+      double
+      VarIntro
+        "x"
+    Print double
+      Id("x")

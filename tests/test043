@@ -1,0 +1,4 @@
+// ReturnType: matching boolean type
+void main() { }
+boolean foo(boolean x) { return x; }
+

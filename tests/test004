@@ -1,0 +1,3 @@
+// MainNoParameters: main() should not have any parameters.
+void main(int x) {}
+

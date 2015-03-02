@@ -1,0 +1,16 @@
+Function
+  void
+  "main"
+  Block
+    Locals
+      int
+      VarIntro
+        "x"
+    Locals
+      double
+      VarIntro
+        "y"
+    Print boolean
+      Eql int
+        Id("x")
+        Id("x")

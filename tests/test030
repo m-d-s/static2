@@ -1,0 +1,3 @@
+// [Other]: while inside while
+void main() { boolean x; while (x) while (x) {} }
+

@@ -1,0 +1,4 @@
+// FormalsUnique: Two parameters, different names and types.
+void main() {}
+void foo(int x, double y) {}
+
