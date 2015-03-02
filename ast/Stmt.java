@@ -17,7 +17,7 @@ public abstract class Stmt {
      *  environment for a following statement.
      */
     public abstract TypeEnv check(Context ctxt, TypeEnv locals)
-      throws Failure; /*{
+      throws Failure;/* {
         throw new Failure("check has not been implemented for this case yet");
     } */
 }

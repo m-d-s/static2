@@ -13,13 +13,18 @@ public abstract class RelBinExpr extends BinExpr {
 
     public Type typeOf(Context ctxt, TypeEnv locals)
             throws Failure {
-        // Find the type of the left operand:
-        Type leftType = left.typeOf(ctxt, locals);
 
-        // Find the type of the right operand:
-        Type rightType = right.typeOf(ctxt, locals);
+        Type leftType = null, rightType = null;    
+        try {
+            // Find the type of the left operand
+            leftType = left.typeOf(ctxt, locals);
 
-        // Check that the right operand produces a value of type boolean:
+            // Find the type of the right operand
+            rightType = right.typeOf(ctxt, locals);
+        } catch ( Failure f ) {
+            ctxt.report(f);
+        }
+        // Check to see if there is a numeric type mismatch
         if (leftType.equals(Type.INT) && rightType.equals(Type.DOUBLE)) {
             left =  new IntToDouble(left);
         }
@@ -27,7 +32,7 @@ public abstract class RelBinExpr extends BinExpr {
             right = new IntToDouble(right);
         }
 
-        // Logical operators produce results of type boolean:
+        // Relationial binary operators produce results of type boolean
         return type=Type.BOOLEAN;
     }
 }

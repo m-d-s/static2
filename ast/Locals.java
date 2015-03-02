@@ -33,9 +33,10 @@ public class Locals extends InitStmt {
         }
     }
 
-//    public TypeEnv check(Context ctxt, TypeEnv locals)
-//        throws Failure {
-//
-//    }
-
+    /*
+    public TypeEnv check(Context ctxt, TypeEnv locals)
+        throws Failure {
+        return locals;        
+    }
+    */
 }
