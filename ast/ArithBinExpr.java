@@ -21,7 +21,7 @@ public abstract class ArithBinExpr extends BinExpr {
             // Find the type of the right operand
             rightType = right.typeOf(ctxt, locals);
             //if either type is BOOLEAN, report an error
-            if( leftType.equals(Type.BOOLEAN) || rightType.equals(Type.BOOLEAN) ){
+            if( !leftType.isNumeric() || !rightType.isNumeric() ){
                 ctxt.report(new Failure( "ArithBinArgsNumeric" ));
             }
 

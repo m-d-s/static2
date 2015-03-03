@@ -631,7 +631,7 @@ identifiers (in the Id class), for example, is as follows:
     }
 
 This code makes use of the following method in the Context class:
-[Aside: Why is this code separated out from the typeOf() method?
+[Aside: Why is this code separated out from the typeOf() method?                        <-----------Advice
 Hint: This function might also come in handy when you are dealing
 with the implementation of assignment statements ...]
 
