@@ -16,8 +16,8 @@ public abstract class Stmt {
      *  the given initial typing environment, and returning the typing
      *  environment for a following statement.
      */
-    public abstract TypeEnv check(Context ctxt, TypeEnv locals)
-      throws Failure;/* {
+    public TypeEnv check(Context ctxt, TypeEnv locals)
+      throws Failure {
         throw new Failure("check has not been implemented for this case yet");
-    } */
+    }
 }

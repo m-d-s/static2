@@ -20,14 +20,17 @@ public abstract class ArithBinExpr extends BinExpr {
             leftType = left.typeOf(ctxt, locals); 
             // Find the type of the right operand
             rightType = right.typeOf(ctxt, locals);
-            //if either type is BOOLEAN, report an error
-            if( !leftType.isNumeric() || !rightType.isNumeric() ){
-                ctxt.report(new Failure( "ArithBinArgsNumeric" ));
-            }
-
         } catch ( Failure f ) {
             ctxt.report(f);
         }
+
+        //if either type is BOOLEAN, report an error
+        if(null == leftType || null == rightType || 
+            !leftType.isNumeric() || !rightType.isNumeric() ){
+            ctxt.report(new Failure( "ArithBinArgsNumeric" ));
+        }
+
+
         // Check to see if there is a numeric type mismatch
         if (leftType.equals(Type.INT) && rightType.equals(Type.DOUBLE)) {
             left =  new IntToDouble(left);
@@ -35,8 +38,10 @@ public abstract class ArithBinExpr extends BinExpr {
         else if(leftType.equals(Type.DOUBLE) && rightType.equals(Type.INT)) {
             right = new IntToDouble(right);
         }
-        //TODO: are you sure?
-        // Arithmetic binary operators produce results of type INTEGER
+        //if either type is of type double, return type double
+        if( leftType.equals(Type.DOUBLE) || rightType.equals(Type.DOUBLE) ) {
+            return type=Type.DOUBLE;
+        }
         return type=Type.INT;
     }
 

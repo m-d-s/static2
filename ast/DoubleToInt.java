@@ -20,4 +20,17 @@ public class DoubleToInt extends CastExpr {
         out.indent(n, "DoubleToInt");
         exp.indent(out, n+1);
     }
+
+    /** Calculate the type of this expression, using the given context
+     *  and type environment.
+     */
+    public Type typeOf(Context ctxt, TypeEnv locals)
+      throws Failure {
+        Type et = exp.typeOf(ctxt, locals);
+        if (!et.equals(Type.DOUBLE)) {
+            ctxt.report(new Failure("CastDouble"));
+        }
+        return Type.INT;
+    }
+
 }
