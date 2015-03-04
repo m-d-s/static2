@@ -33,7 +33,9 @@ public class Return extends Stmt {
 
     public TypeEnv check(Context ctxt, TypeEnv locals)
       throws Failure {
-        type = exp.typeOf(ctxt, locals);
+        if( null != exp ) {    
+            type = exp.typeOf(ctxt, locals);
+        }
         return locals;
     }
 

@@ -35,7 +35,7 @@ public abstract class ArithBinExpr extends BinExpr {
         else if(leftType.equals(Type.DOUBLE) && rightType.equals(Type.INT)) {
             right = new IntToDouble(right);
         }
-
+        //TODO: are you sure?
         // Arithmetic binary operators produce results of type INTEGER
         return type=Type.INT;
     }

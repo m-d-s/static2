@@ -60,7 +60,9 @@ public class If extends Stmt {
             ctxt.report(f);
         }
         tTE = ifTrue.check(ctxt, tTE);
-        fTE = ifFalse.check(ctxt, fTE);
+        if( null != ifFalse ) {
+            fTE = ifFalse.check(ctxt, fTE);
+        }
         return locals;
     }
 }

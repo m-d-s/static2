@@ -33,10 +33,10 @@ public class Globals extends Defn {
     /** Extend the environments in the given context with entries from
      *  this definition.
      */
-    void extendGlobalEnv(Context ctxt)
+    public void extendGlobalEnv(Context ctxt)
       throws Failure {
         for (int i=0; i<vars.length; i++) {
-           vars[i].extendGlobalEnv(ctxt, type);
+             vars[i].extendGlobalEnv(ctxt, type);
         }
-    }
+    }    
 }
