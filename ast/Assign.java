@@ -41,34 +41,30 @@ public class Assign extends StmtExpr {
    
     public Type typeOf(Context ctxt, TypeEnv locals)
         throws Failure {
+        TypeEnv envOf = null;
         try {
-            locals = ctxt.findVar( lhs, locals );
+            envOf = ctxt.findVar( lhs, locals );
         }catch ( Failure f ) {
             ctxt.report( f );
         }
-
         type = rhs.typeOf(ctxt, locals);
-        
         //type mismatch
-        if( ( lhs.equals("INT") || lhs.equals("DOUBLE") ) && !type.isNumeric() ||
-            lhs.equals("BOOLEAN") && type.isNumeric() ) {
+        if( ( Type.INT == envOf.getType() || Type.DOUBLE == envOf.getType()  ) && !type.isNumeric() ||
+            Type.BOOLEAN == envOf.getType() && type.isNumeric() ) {
             ctxt.report( new Failure("AssignTypes") ); 
         }
         
         //both types numeric 
-        if( ( lhs.equals("INT") || lhs.equals("DOUBLE") ) && type.isNumeric() ) {
-            String  right = type.toString();
-            if( lhs.equals(type) && lhs.equals("INT")  ||
-                lhs.equals(type) && lhs.equals("DOUBLE") ) {
+        if( ( Type.INT == envOf.getType() || Type.DOUBLE == envOf.getType() ) && type.isNumeric() ) {
+            if( envOf.getType() == type) {
                 return type;
-            } else if ( lhs.equals("INT") ) {
+            } else if ( Type.INT == envOf.getType() ) {
                 rhs = new DoubleToInt(rhs);                
             } else {
                 rhs = new IntToDouble(rhs);
             }
         }
-
-        return type;
+        return type = rhs.typeOf(ctxt, locals);
     }
    
 }

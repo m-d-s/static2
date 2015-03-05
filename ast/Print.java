@@ -36,7 +36,14 @@ public class Print extends Stmt {
      */
     public TypeEnv check(Context ctxt, TypeEnv locals)
       throws Failure {
-        type = exp.typeOf(ctxt, locals);
+        try {
+            type = exp.typeOf(ctxt, locals);
+        }catch( Failure f ) {
+            ctxt.report( f );
+        }
+        if( null == type ) {
+            ctxt.report( new Failure("PrintArgument") );
+        }
         return locals;
     }
 }
