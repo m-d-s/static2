@@ -15,8 +15,6 @@ public class Return extends Stmt {
         this.exp = exp;
     }
 
-    private Type type = null;
-
     /** Print an indented description of this abstract syntax node,
      *  including a name for the node itself at the specified level
      *  of indentation, plus more deeply indented descriptions of
@@ -30,13 +28,35 @@ public class Return extends Stmt {
             exp.indent(out, n+1);
         }
     }
-
     public TypeEnv check(Context ctxt, TypeEnv locals)
       throws Failure {
-        if( null != exp ) {    
-            type = exp.typeOf(ctxt, locals);
+        Type retType = ctxt.retType, type = null;  
+        try{
+            if( null != exp ) {
+                type = exp.typeOf(ctxt, locals);
+            }
+        }catch( Failure f ) {
+            ctxt.report( f );
         }
+
+        //check for numeric type mis match and cast accordingly
+        if( null != type && null != retType ) {
+            if( type == Type.INT && retType == Type.DOUBLE ) {
+                type = Type.DOUBLE;
+                exp = new IntToDouble(exp);
+            }else if( type == Type.DOUBLE && retType == Type.INT ) {
+                type = Type.INT;
+                exp = new DoubleToInt(exp);
+            }
+        }
+
+        if( type != retType) {
+            ctxt.report( new Failure( "ReturnType" ) );
+        }
+
         return locals;
     }
+
+
 
 }

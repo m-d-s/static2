@@ -30,4 +30,28 @@ public class Call extends StmtExpr {
             args[i].indent(out, n+1);
         }
     }
+
+    public Type typeOf(Context ctxt, TypeEnv locals)
+      throws Failure {
+        FunctionEnv env = ctxt.functions.find(name, ctxt.functions);
+        Function function;
+        if( null == env) {
+            ctxt.report( new Failure("FunctionDefined") );
+        }
+        
+        /*
+        function = env.getFunction;
+        
+        while(decl == null && functions != null) {
+            decl = functions
+        }
+      
+        TypeEnv inner = locals;
+        for (int i=0; i<args.length; i++) {
+            inner = args[i].check(ctxt, inner);
+        }
+        */
+       return locals; 
+    }
+
 }

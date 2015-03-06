@@ -15,8 +15,9 @@ public abstract class Expr {
     /** Calculate the type of this expression, using the given context
      *  and type environment.
      */
-    public Type typeOf(Context ctxt, TypeEnv locals)
-      throws Failure {
+    public abstract Type typeOf(Context ctxt, TypeEnv locals)
+      throws Failure;/* {
         throw new Failure("typeOf has not been implemented for this case yet");
     }
+    */
 }

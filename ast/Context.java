@@ -70,7 +70,6 @@ public class Context {
             report(new Failure("MainDefined"));
         }
     }
-
     /** Look for the type of this variable, starting in the given
      *  type environment for local variables, but then falling back
      *  to the environment for global variables in the context.
