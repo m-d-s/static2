@@ -35,23 +35,13 @@ public class Call extends StmtExpr {
       throws Failure {
         FunctionEnv env = ctxt.functions.find(name, ctxt.functions);
         Function function;
-        if( null == env) {
-            ctxt.report( new Failure("FunctionDefined") );
-        }
+        if( null != env) {
+            function = env.getFunction();
+            return function.compareParams(args, ctxt, locals);
+        }        
         
-        /*
-        function = env.getFunction;
-        
-        while(decl == null && functions != null) {
-            decl = functions
-        }
-      
-        TypeEnv inner = locals;
-        for (int i=0; i<args.length; i++) {
-            inner = args[i].check(ctxt, inner);
-        }
-        */
-       return locals; 
+        ctxt.report( new Failure("FunctionDefined") );
+        return null;
     }
 
 }

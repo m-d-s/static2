@@ -78,4 +78,27 @@ public class Function extends Defn {
         ctxt.retType = this.retType;
         body.check(ctxt, locals);
     }
+
+    Type compareParams( Expr[] args, Context ctxt, TypeEnv locals ) {
+        int numArgs = args.length, numFormal = formals.length;
+        if( numArgs != numFormal ) {
+            ctxt.report(new Failure("CallNumberOfArgs"));
+        } 
+        for( int i = 0; i < numArgs && i < numFormal; ++i ) {
+            try{
+                if( args[i].typeOf(ctxt, locals) != formals[i].getType() ) {
+                    ctxt.report( new Failure("FormalTypeMismatch") );
+                }
+            }catch(Failure f) {
+                ctxt.report(f);
+            }
+        }
+        return retType;
+    }   
 }
+
+
+
+
+
+
