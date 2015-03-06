@@ -31,16 +31,15 @@ public abstract class ArithBinExpr extends BinExpr {
             throw new Failure( "ArithBinArgsNumeric" );
         }
 
-
         // Check to see if there is a numeric type mismatch
-        if (leftType.equals(Type.INT) && rightType.equals(Type.DOUBLE)) {
+        if ( Type.INT == leftType && Type.DOUBLE == rightType ) {
             left =  new IntToDouble(left);
         }
-        else if(leftType.equals(Type.DOUBLE) && rightType.equals(Type.INT)) {
+        else if(Type.DOUBLE == leftType && Type.INT == rightType) {
             right = new IntToDouble(right);
         }
         //if either type is of type double, return type double
-        if( leftType.equals(Type.DOUBLE) || rightType.equals(Type.DOUBLE) ) {
+        if( Type.DOUBLE == leftType || Type.DOUBLE == rightType ) {
             return type=Type.DOUBLE;
         }
         return type=Type.INT;

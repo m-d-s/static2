@@ -94,7 +94,15 @@ public class Function extends Defn {
             }
         }
         return retType;
-    }   
+    } 
+
+    boolean compareRetType(Type src) {
+        return retType == src;
+    }
+
+    int getNumFormals() {
+        return formals.length;
+    }  
 }
 
 

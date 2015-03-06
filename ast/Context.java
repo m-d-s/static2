@@ -62,12 +62,21 @@ public class Context {
 
         // Type check each function definition in this program:
         isGlobal = false;
+        Function mainFunc;
         FunctionEnv.check(this, functions);
-
         // Check for main function:
         FunctionEnv main = FunctionEnv.find("main", functions);
         if (main==null) {
             report(new Failure("MainDefined"));
+        }
+        else {
+            mainFunc = main.getFunction();
+            if( !mainFunc.compareRetType(null) ) {
+                report( new Failure("MainVoid") );
+            }
+            if( 0 != mainFunc.getNumFormals() ) {
+                report( new Failure("MainNoParameters") );
+            }
         }
     }
     /** Look for the type of this variable, starting in the given
