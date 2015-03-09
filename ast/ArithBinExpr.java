@@ -41,7 +41,7 @@ public abstract class ArithBinExpr extends BinExpr {
         if( Type.DOUBLE == leftType || Type.DOUBLE == rightType ) {
             return type=Type.DOUBLE;
         }
-        return type=Type.INT;
+        return type = Type.INT;
     }
 
 }

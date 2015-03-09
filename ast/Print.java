@@ -38,12 +38,12 @@ public class Print extends Stmt {
       throws Failure {
         try {
             type = exp.typeOf(ctxt, locals);
+            if( Type.BOOLEAN != type && Type.INT != type && Type.DOUBLE != type ) {
+                ctxt.report( new Failure("PrintArgument") );
+            }
         }catch( Failure f ) {
             ctxt.report( f );
         }
-        if( null == type ) {
-            ctxt.report( new Failure("PrintArgument") );
-        }
-        return locals;
+       return locals;
     }
 }

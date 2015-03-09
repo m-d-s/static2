@@ -81,12 +81,21 @@ public class Function extends Defn {
 
     Type compareParams( Expr[] args, Context ctxt, TypeEnv locals ) {
         int numArgs = args.length, numFormal = formals.length;
+        Type argType = null, formalType = null;
         if( numArgs != numFormal ) {
             ctxt.report(new Failure("CallNumberOfArgs"));
         } 
         for( int i = 0; i < numArgs && i < numFormal; ++i ) {
             try{
-                if( args[i].typeOf(ctxt, locals) != formals[i].getType() ) {
+                argType = args[i].typeOf(ctxt, locals);
+                formalType = formals[i].getType();
+                if( Type.INT == argType && Type.DOUBLE == formalType ) {
+                    args[i] = new IntToDouble(args[i]);
+                }
+                else if( Type.DOUBLE == argType && Type.INT == formalType ) {
+                    args[i] = new DoubleToInt(args[i]);
+                }
+                else if( argType != formalType ) {
                     ctxt.report( new Failure("FormalTypeMismatch") );
                 }
             }catch(Failure f) {
