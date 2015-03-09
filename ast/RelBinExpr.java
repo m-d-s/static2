@@ -33,20 +33,9 @@ public abstract class RelBinExpr extends BinExpr {
         else if(Type.DOUBLE == leftType && Type.INT == rightType) {
             right = new IntToDouble(right);
         }
-        
-        //TODO: this looks weird
-        //assin a value to type
-        if( leftType == Type.INT ) {
-            type = Type.INT;
-        }
-        else if ( leftType == Type.DOUBLE ) {
-            type = Type.DOUBLE;
-        }
-        else {
-            type = Type.BOOLEAN;
-        }
-
-       // Relationial binary operators produce results of type boolean
+        //assign the expression type to the left type
+        type = leftType;
+        // Relationial binary operators produce results of type boolean
         return Type.BOOLEAN;
     }
 }

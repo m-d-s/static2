@@ -44,9 +44,28 @@ public class InitVarIntro extends VarIntro {
         if( exp instanceof Call ) {
             ctxt.report( new Failure("GlobalsNoCalls") );
         }
+        //retrieve current expression type
         Type actual = exp.typeOf(ctxt, null);
+        //check for type inconsistancies  
+        typeCheck(ctxt, type, actual);
+        //add declaration to the global scope
+        ctxt.globals = new TypeEnv(name, type, ctxt.globals);
+    }
+
+    TypeEnv extendLocalEnv( Context ctxt, Type type, TypeEnv locals ) {
+        Type actual = null;
+        try{
+            actual = exp.typeOf(ctxt, locals);
+        }catch( Failure f ) {
+            ctxt.report(f);
+        }
+        typeCheck(ctxt, type, actual);
+        return locals = new TypeEnv(name, type, locals);
+    }
+   
+    void typeCheck(Context ctxt, Type type, Type actual) {
         //cast numeric types to match
-        if ( Type.INT ==type && Type.DOUBLE == actual ) {
+        if ( Type.INT == type && Type.DOUBLE == actual ) {
             exp = new DoubleToInt(exp);
         } 
         else if ( Type.DOUBLE == type && Type.INT == actual ) {
@@ -56,8 +75,6 @@ public class InitVarIntro extends VarIntro {
         else if ( !type.equals(actual) ) {
             ctxt.report(new Failure("InitVarEntryType"));
         }
-        //add declaration to the global scope
-        ctxt.globals = new TypeEnv(name, type, ctxt.globals);
-    }
-    
+
+    } 
 }

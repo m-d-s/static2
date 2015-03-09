@@ -34,4 +34,8 @@ public class VarIntro {
       throws Failure {
         ctxt.report(new Failure("GlobalsInitialized"));
     }
+
+    TypeEnv extendLocalEnv( Context ctxt, Type type, TypeEnv locals ) {
+        return locals = new TypeEnv(name, type, locals);
+    }
 }
