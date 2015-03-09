@@ -35,8 +35,10 @@ public class Locals extends InitStmt {
 
     public TypeEnv check(Context ctxt, TypeEnv locals)
         throws Failure {
+        Type expType;
         for( int i=0; i<vars.length; ++i ) {
-            locals = new TypeEnv(vars[i].name, type, locals);
+           //extend local environment
+           locals = new TypeEnv(vars[i].name, type, locals);
         }
         return locals;      
     }

@@ -49,8 +49,13 @@ public class Return extends Stmt {
                 exp = new DoubleToInt(exp);
             }
         }
-
-        if( type != retType) {
+        if( type == null && retType != null ) {
+            ctxt.report( new Failure("ReturnValueRequired") );
+        }
+        else if( type != null && retType == null ) {
+            ctxt.report( new Failure("ReturnVoidRequired") );
+        }
+        else if( type != retType) {
             ctxt.report( new Failure( "ReturnType" ) );
         }
 

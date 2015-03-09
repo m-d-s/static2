@@ -24,11 +24,10 @@ public abstract class ArithBinExpr extends BinExpr {
             ctxt.report(f);
         }
         
-        /**TODO: make sure this is correct*/
         //if either type is BOOLEAN, report an error
-        if(null == leftType || null == rightType || 
-            !leftType.isNumeric() || !rightType.isNumeric() ) {
-            throw new Failure( "ArithBinArgsNumeric" );
+        if( Type.INT != leftType && Type.DOUBLE != leftType ||
+            Type.INT != rightType && Type.DOUBLE != rightType ) {
+            ctxt.report( new Failure( "ArithBinArgsNumeric" ) );
         }
 
         // Check to see if there is a numeric type mismatch

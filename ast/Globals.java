@@ -36,7 +36,7 @@ public class Globals extends Defn {
     public void extendGlobalEnv(Context ctxt)
       throws Failure {
         for (int i=0; i<vars.length; i++) {
-             vars[i].extendGlobalEnv(ctxt, type);
+               vars[i].extendGlobalEnv(ctxt, type);
         }
     }    
 }

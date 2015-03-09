@@ -39,8 +39,11 @@ public class InitVarIntro extends VarIntro {
         if (TypeEnv.find(name, ctxt.globals)!=null) {
             ctxt.report(new Failure("GlobalsUnique"));
         }
+        if( exp instanceof Call ) {
+            ctxt.report( new Failure("GlobalsNoCalls") );
+        }
         Type actual = exp.typeOf(ctxt, null);
-        if (type.equals(Type.INT) && actual.equals(Type.DOUBLE)) {
+        if ( Type.INT ==type && Type.DOUBLE == actual ) {
             exp = new DoubleToInt(exp);
         } else if (type.equals(Type.DOUBLE) && actual.equals(Type.INT)) {
             exp = new IntToDouble(exp);
@@ -49,4 +52,5 @@ public class InitVarIntro extends VarIntro {
         }
         ctxt.globals = new TypeEnv(name, type, ctxt.globals);
     }
+    
 }
