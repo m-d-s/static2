@@ -82,13 +82,16 @@ public class Function extends Defn {
     Type compareParams( Expr[] args, Context ctxt, TypeEnv locals ) {
         int numArgs = args.length, numFormal = formals.length;
         Type argType = null, formalType = null;
+        //if the array lengths dont match
         if( numArgs != numFormal ) {
             ctxt.report(new Failure("CallNumberOfArgs"));
         } 
+        //loop through each array to compare types
         for( int i = 0; i < numArgs && i < numFormal; ++i ) {
             try{
                 argType = args[i].typeOf(ctxt, locals);
                 formalType = formals[i].getType();
+                //cast numeric types to match
                 if( Type.INT == argType && Type.DOUBLE == formalType ) {
                     args[i] = new IntToDouble(args[i]);
                 }
@@ -104,11 +107,13 @@ public class Function extends Defn {
         }
         return retType;
     } 
-
+    
+    //compare the passed type with retType member
     boolean compareRetType(Type src) {
         return retType == src;
     }
-
+    
+    //find length of Formals array
     int getNumFormals() {
         return formals.length;
     }  

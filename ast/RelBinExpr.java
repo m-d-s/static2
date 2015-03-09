@@ -19,11 +19,12 @@ public abstract class RelBinExpr extends BinExpr {
         leftType = left.typeOf(ctxt, locals);
         // Find the type of the right operand
         rightType = right.typeOf(ctxt, locals);
-
+        
+        //check for non numeric / boolean type mismatch
         if( leftType.isNumeric() && !rightType.isNumeric() ||
             !leftType.isNumeric() && rightType.isNumeric() ) {
             ctxt.report( new Failure( "RelBinArgs" ) );
-            }
+        }
         
         // Check to see if there is a numeric type mismatch
         if (Type.INT == leftType && Type.DOUBLE == rightType) {
@@ -32,7 +33,9 @@ public abstract class RelBinExpr extends BinExpr {
         else if(Type.DOUBLE == leftType && Type.INT == rightType) {
             right = new IntToDouble(right);
         }
-
+        
+        //TODO: this looks weird
+        //assin a value to type
         if( leftType == Type.INT ) {
             type = Type.INT;
         }

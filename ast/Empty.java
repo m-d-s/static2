@@ -14,6 +14,7 @@ public class Empty extends Stmt {
         out.indent(n, "Empty");
     }
 
+    //not much to do, just return locals
     public TypeEnv check(Context ctxt, TypeEnv locals) {
         return locals;
     }

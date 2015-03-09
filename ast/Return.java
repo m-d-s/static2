@@ -49,12 +49,15 @@ public class Return extends Stmt {
                 exp = new DoubleToInt(exp);
             }
         }
+        //check if non void return is expected
         if( type == null && retType != null ) {
             ctxt.report( new Failure("ReturnValueRequired") );
         }
+        //check if void return type is expected
         else if( type != null && retType == null ) {
             ctxt.report( new Failure("ReturnVoidRequired") );
         }
+        //check if return type mismatch
         else if( type != retType) {
             ctxt.report( new Failure( "ReturnType" ) );
         }

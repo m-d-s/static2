@@ -36,20 +36,27 @@ public class InitVarIntro extends VarIntro {
      */
     void extendGlobalEnv(Context ctxt, Type type)
       throws Failure {
+        //check for redeclared global variables
         if (TypeEnv.find(name, ctxt.globals)!=null) {
             ctxt.report(new Failure("GlobalsUnique"));
         }
+        //check for global variables being initialized with function calls
         if( exp instanceof Call ) {
             ctxt.report( new Failure("GlobalsNoCalls") );
         }
         Type actual = exp.typeOf(ctxt, null);
+        //cast numeric types to match
         if ( Type.INT ==type && Type.DOUBLE == actual ) {
             exp = new DoubleToInt(exp);
-        } else if (type.equals(Type.DOUBLE) && actual.equals(Type.INT)) {
+        } 
+        else if ( Type.DOUBLE == type && Type.INT == actual ) {
             exp = new IntToDouble(exp);
-        } else if (!type.equals(actual)) {
+        }
+        //check for type mismatch 
+        else if ( !type.equals(actual) ) {
             ctxt.report(new Failure("InitVarEntryType"));
         }
+        //add declaration to the global scope
         ctxt.globals = new TypeEnv(name, type, ctxt.globals);
     }
     

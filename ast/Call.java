@@ -33,13 +33,16 @@ public class Call extends StmtExpr {
 
     public Type typeOf(Context ctxt, TypeEnv locals)
       throws Failure {
+        //use 'name' to retrieve the function environment
         FunctionEnv env = ctxt.functions.find(name, ctxt.functions);
         Function function;
+        //if the environment was declared
         if( null != env) {
             function = env.getFunction();
+            //compare the argument list and return the functions type
             return function.compareParams(args, ctxt, locals);
         }        
-        
+        //if the function was not declared
         ctxt.report( new Failure("FunctionDefined") );
         return null;
     }
