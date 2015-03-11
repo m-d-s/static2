@@ -44,11 +44,11 @@ public class Assign extends StmtExpr {
         TypeEnv envOf = null;
         try {
             envOf = ctxt.findVar( lhs, locals );
+            type = rhs.typeOf(ctxt, locals);
         }catch ( Failure f ) {
             ctxt.report( f );
         }
-        type = rhs.typeOf(ctxt, locals);
-        //type mismatch
+        // non numeric type mismatch
         if( ( Type.INT == envOf.getType() || Type.DOUBLE == envOf.getType()  ) && !type.isNumeric() ||
             Type.BOOLEAN == envOf.getType() && type.isNumeric() ) {
             ctxt.report( new Failure("AssignTypes") ); 
@@ -58,9 +58,12 @@ public class Assign extends StmtExpr {
         if( ( Type.INT == envOf.getType() || Type.DOUBLE == envOf.getType() ) && type.isNumeric() ) {
             if( envOf.getType() == type) {
                 return type;
-            } else if ( Type.INT == envOf.getType() ) {
+            } 
+            //type cast numeric mismatch
+            else if ( Type.INT == envOf.getType() ) {
                 rhs = new DoubleToInt(rhs);                
-            } else {
+            } 
+            else {
                 rhs = new IntToDouble(rhs);
             }
         }

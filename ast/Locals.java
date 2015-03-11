@@ -36,8 +36,9 @@ public class Locals extends InitStmt {
     public TypeEnv check(Context ctxt, TypeEnv locals)
         throws Failure {
         for( int i=0; i<vars.length; ++i ) {
-            for(int j=0; j<vars.length; ++j) {
-                if( j != i && vars[i].name.equals(vars[j].name) ) {
+            for(int j=0; j<i; ++j) {
+                //check for redefined locals variable in declaration
+                if( vars[i].name.equals(vars[j].name) ) {
                     throw new Failure("LocalsUnique");
                 }
             }

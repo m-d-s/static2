@@ -1,6 +1,5 @@
 package ast;
 import compiler.Failure;
-
 /** An abstract base class for binary expressions (i.e.,
  *  expressions that have a left and a right operand).
  */
@@ -47,4 +46,21 @@ public abstract class BinExpr extends Expr {
      *  particular type of operator node.
      */
     abstract String label();
+
+    public void checkForVoidReturn( Type leftType, Type rightType )
+      throws Failure {
+        if( null == leftType || null == rightType ) {
+            throw new Failure("CallReturnType");
+        }
+    }
+
+    public void checkForGlobalCall( Context ctxt ) 
+        throws Failure {
+        if( true == ctxt.isGlobal ) {
+            if( left instanceof Call || right instanceof Call ) {
+                throw new Failure("GlobalsNoCalls");
+            }
+        }
+    }
+
 }

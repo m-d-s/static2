@@ -36,6 +36,7 @@ public class Call extends StmtExpr {
         //use 'name' to retrieve the function environment
         FunctionEnv env = ctxt.functions.find(name, ctxt.functions);
         Function function;
+        
         //if the environment was declared
         if( null != env) {
             function = env.getFunction();
@@ -43,8 +44,8 @@ public class Call extends StmtExpr {
             return function.compareParams(args, ctxt, locals);
         }        
         //if the function was not declared
-        ctxt.report( new Failure("FunctionDefined") );
-        return null;
+        throw new Failure("FunctionDefined");
+        
     }
 
 }

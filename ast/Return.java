@@ -30,7 +30,8 @@ public class Return extends Stmt {
     }
     public TypeEnv check(Context ctxt, TypeEnv locals)
       throws Failure {
-        Type retType = ctxt.retType, type = null;  
+        Type retType = ctxt.retType, type = null;   
+
         try{
             if( null != exp ) {
                 type = exp.typeOf(ctxt, locals);
@@ -38,33 +39,35 @@ public class Return extends Stmt {
         }catch( Failure f ) {
             ctxt.report( f );
         }
-
-        //check for numeric type mis match and cast accordingly
-        if( null != type && null != retType ) {
-            if( type == Type.INT && retType == Type.DOUBLE ) {
-                type = Type.DOUBLE;
-                exp = new IntToDouble(exp);
-            }else if( type == Type.DOUBLE && retType == Type.INT ) {
-                type = Type.INT;
-                exp = new DoubleToInt(exp);
-            }
+        
+       //check for numeric type mismatch and cast accordingly
+        if( Type.INT == type && Type.DOUBLE == retType ) {
+            type = Type.DOUBLE;
+            exp = new IntToDouble(exp);
         }
+        else if( Type.DOUBLE == type && Type.INT == retType ) {
+            type = Type.INT;
+            exp = new DoubleToInt(exp);
+        }
+        
         //check if non void return is expected
-        if( type == null && retType != null ) {
+        if( null == exp && null != retType ) {
             ctxt.report( new Failure("ReturnValueRequired") );
+            return locals;
         }
         //check if void return type is expected
-        else if( type != null && retType == null ) {
+        else if( null != exp && null == retType ) {
+            if( exp instanceof Call ) {
+                ctxt.report( new Failure("CallReturnType") );
+            }
             ctxt.report( new Failure("ReturnVoidRequired") );
+            return locals;
         }
-        //check if return type mismatch
+        //check for remaining return type mismatch
         else if( type != retType) {
             ctxt.report( new Failure( "ReturnType" ) );
         }
 
         return locals;
     }
-
-
-
 }

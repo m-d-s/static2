@@ -15,11 +15,17 @@ public abstract class RelBinExpr extends BinExpr {
             throws Failure {
 
         Type leftType = null, rightType = null;    
-        // Find the type of the left operand
-        leftType = left.typeOf(ctxt, locals);
-        // Find the type of the right operand
-        rightType = right.typeOf(ctxt, locals);
-        
+        try {
+            // Find the type of the left operand
+            leftType = left.typeOf(ctxt, locals);
+            // Find the type of the right operand
+            rightType = right.typeOf(ctxt, locals);
+            
+            checkForVoidReturn(leftType, rightType);
+        }catch( Failure f ) {
+            ctxt.report(f);
+        } 
+
         //check for non numeric / boolean type mismatch
         if( leftType.isNumeric() && !rightType.isNumeric() ||
             !leftType.isNumeric() && rightType.isNumeric() ) {

@@ -20,17 +20,19 @@ public abstract class ArithBinExpr extends BinExpr {
             leftType = left.typeOf(ctxt, locals); 
             // Find the type of the right operand
             rightType = right.typeOf(ctxt, locals);
+            //check for functions with void return types
+            checkForVoidReturn(leftType, rightType);
+            checkForGlobalCall(ctxt);
+            //if either type is BOOLEAN, report an error
+            if( Type.INT != leftType && Type.DOUBLE != leftType ||
+                Type.INT != rightType && Type.DOUBLE != rightType ) {
+                ctxt.report( new Failure( "ArithBinArgsNumeric" ) );
+            }
         } catch ( Failure f ) {
             ctxt.report(f);
         }
         
-        //if either type is BOOLEAN, report an error
-        if( Type.INT != leftType && Type.DOUBLE != leftType ||
-            Type.INT != rightType && Type.DOUBLE != rightType ) {
-            ctxt.report( new Failure( "ArithBinArgsNumeric" ) );
-        }
-
-        // Check to see if there is a numeric type mismatch
+         // Check to see if there is a numeric type mismatch
         if ( Type.INT == leftType && Type.DOUBLE == rightType ) {
             left =  new IntToDouble(left);
         }

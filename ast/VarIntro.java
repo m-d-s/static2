@@ -36,6 +36,6 @@ public class VarIntro {
     }
 
     TypeEnv extendLocalEnv( Context ctxt, Type type, TypeEnv locals ) {
-        return locals = new TypeEnv(name, type, locals);
+        return new TypeEnv(name, type, locals);
     }
 }

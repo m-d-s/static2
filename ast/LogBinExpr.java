@@ -16,6 +16,12 @@ public abstract class LogBinExpr extends BinExpr {
      */
     public Type typeOf(Context ctxt, TypeEnv locals)
       throws Failure {
+        try{
+            checkForGlobalCall(ctxt);
+        }catch(Failure f) {
+            ctxt.report(f);
+        }
+      
         // Find the type of the left operand:
         Type leftType = left.typeOf(ctxt, locals);
   
