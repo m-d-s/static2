@@ -37,8 +37,9 @@ public class Print extends Stmt {
     public TypeEnv check(Context ctxt, TypeEnv locals)
       throws Failure {
         try {
-            type = exp.typeOf(ctxt, locals);
-            if( Type.BOOLEAN != type && Type.INT != type && Type.DOUBLE != type ) {
+            this.type = this.exp.typeOf(ctxt, locals);
+            //check validity of expression type
+            if( Type.BOOLEAN != this.type && Type.INT != this.type && Type.DOUBLE != this.type ) {
                 ctxt.report( new Failure("PrintArgument") );
             }
         }catch( Failure f ) {

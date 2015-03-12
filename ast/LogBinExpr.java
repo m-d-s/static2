@@ -23,7 +23,7 @@ public abstract class LogBinExpr extends BinExpr {
         }
       
         // Find the type of the left operand:
-        Type leftType = left.typeOf(ctxt, locals);
+        Type leftType = this.left.typeOf(ctxt, locals);
   
         // Check that the left operand produces a value of type boolean:
         if (!leftType.equals(Type.BOOLEAN)) {
@@ -31,7 +31,7 @@ public abstract class LogBinExpr extends BinExpr {
         }
   
         // Find the type of the right operand:
-        Type rightType = right.typeOf(ctxt, locals);
+        Type rightType = this.right.typeOf(ctxt, locals);
   
         // Check that the right operand produces a value of type boolean:
         if (!rightType.equals(Type.BOOLEAN)) {
@@ -39,6 +39,6 @@ public abstract class LogBinExpr extends BinExpr {
         }
   
         // Logical operators produce results of type boolean:
-        return type=Type.BOOLEAN;
+        return this.type=Type.BOOLEAN;
     }
 }

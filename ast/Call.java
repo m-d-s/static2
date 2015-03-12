@@ -31,19 +31,22 @@ public class Call extends StmtExpr {
         }
     }
 
-    public Type typeOf(Context ctxt, TypeEnv locals)
+    /** Calculate the type of this expression, using the given context
+     *  and type environment.
+     */ 
+     public Type typeOf(Context ctxt, TypeEnv locals)
       throws Failure {
         //use 'name' to retrieve the function environment
-        FunctionEnv env = ctxt.functions.find(name, ctxt.functions);
+        FunctionEnv env = ctxt.functions.find(this.name, ctxt.functions);
         Function function;
         
-        //if the environment was declared
+        //if the function was declared in the environment
         if( null != env) {
             function = env.getFunction();
             //compare the argument list and return the functions type
-            return function.compareParams(args, ctxt, locals);
+            return function.compareParams(this.args, ctxt, locals);
         }        
-        //if the function was not declared
+        
         throw new Failure("FunctionDefined");
         
     }

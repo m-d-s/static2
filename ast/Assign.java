@@ -38,36 +38,42 @@ public class Assign extends StmtExpr {
         rhs.indent(out, n+1);
     }
 
-   
+    /** Calculate the type of this expression, using the given context
+     *  and type environment.
+     */  
     public Type typeOf(Context ctxt, TypeEnv locals)
         throws Failure {
         TypeEnv envOf = null;
+        Type defType = null;
         try {
-            envOf = ctxt.findVar( lhs, locals );
-            type = rhs.typeOf(ctxt, locals);
-        }catch ( Failure f ) {
+            this.type = this.rhs.typeOf(ctxt, locals);
+        }
+        catch ( Failure f ) {
             ctxt.report( f );
         }
+        //find the lhs variable definition
+        envOf = ctxt.findVar( this.lhs, locals );
+        defType = envOf.getType();
         // non numeric type mismatch
-        if( ( Type.INT == envOf.getType() || Type.DOUBLE == envOf.getType()  ) && !type.isNumeric() ||
-            Type.BOOLEAN == envOf.getType() && type.isNumeric() ) {
+        if( defType.isNumeric() && Type.BOOLEAN == this.type || 
+            Type.BOOLEAN == defType && this.type.isNumeric() ) {
             ctxt.report( new Failure("AssignTypes") ); 
         }
         
         //both types numeric 
-        if( ( Type.INT == envOf.getType() || Type.DOUBLE == envOf.getType() ) && type.isNumeric() ) {
-            if( envOf.getType() == type) {
-                return type;
+        if( defType.isNumeric() && type.isNumeric() ) {
+            if( defType == this.type) {
+                return this.type;
             } 
             //type cast numeric mismatch
-            else if ( Type.INT == envOf.getType() ) {
-                rhs = new DoubleToInt(rhs);                
+            else if ( Type.INT == defType ) {
+                this.rhs = new DoubleToInt(this.rhs);                
             } 
             else {
-                rhs = new IntToDouble(rhs);
+                this.rhs = new IntToDouble(this.rhs);
             }
         }
-        return type = rhs.typeOf(ctxt, locals);
+        return this.type = defType;
     }
    
 }

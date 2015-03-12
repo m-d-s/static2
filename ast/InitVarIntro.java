@@ -47,34 +47,38 @@ public class InitVarIntro extends VarIntro {
         //retrieve current expression type
         Type actual = exp.typeOf(ctxt, null);
         //check for type inconsistancies  
-        typeCheck(ctxt, type, actual);
+        this.typeCheck(ctxt, type, actual);
         //add declaration to the global scope
         ctxt.globals = new TypeEnv(name, type, ctxt.globals);
     }
 
+    /**Extend the given local environment with an entr for the variable 
+     * that is introduced here using the given type
+     */
     TypeEnv extendLocalEnv( Context ctxt, Type type, TypeEnv locals ) {
         Type actual = null;
         try{
-            actual = exp.typeOf(ctxt, locals);
+            actual = this.exp.typeOf(ctxt, locals);
         }catch( Failure f ) {
             ctxt.report(f);
         }
-        typeCheck(ctxt, type, actual);
-        return locals = new TypeEnv(name, type, locals);
+        this.typeCheck(ctxt, type, actual);
+        return locals = new TypeEnv(this.name, type, locals);
     }
    
+    /**Check for type inconsistancies and cast numeric mismatches accordingly
+     */
     void typeCheck(Context ctxt, Type type, Type actual) {
         //cast numeric types to match
         if ( Type.INT == type && Type.DOUBLE == actual ) {
-            exp = new DoubleToInt(exp);
+            this.exp = new DoubleToInt(this.exp);
         } 
         else if ( Type.DOUBLE == type && Type.INT == actual ) {
-            exp = new IntToDouble(exp);
+            this.exp = new IntToDouble(this.exp);
         }
         //check for type mismatch 
-        else if ( !type.equals(actual) ) {
+        else if ( actual != type ) {
             ctxt.report(new Failure("InitVarEntryType"));
         }
-
     } 
 }

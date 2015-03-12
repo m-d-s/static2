@@ -47,17 +47,19 @@ public abstract class BinExpr extends Expr {
      */
     abstract String label();
 
+    //error check to be called in inherited classes
     public void checkForVoidReturn( Type leftType, Type rightType )
       throws Failure {
         if( null == leftType || null == rightType ) {
             throw new Failure("CallReturnType");
         }
     }
-
+    
+    //error check to be called in inherited classes
     public void checkForGlobalCall( Context ctxt ) 
         throws Failure {
         if( true == ctxt.isGlobal ) {
-            if( left instanceof Call || right instanceof Call ) {
+            if( this.left instanceof Call || this.right instanceof Call ) {
                 throw new Failure("GlobalsNoCalls");
             }
         }

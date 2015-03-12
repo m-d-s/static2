@@ -53,7 +53,7 @@ public class If extends Stmt {
         throws Failure {
         TypeEnv tTE = locals, fTE = locals;
         try {
-            if (!test.typeOf(ctxt, locals).equals(Type.BOOLEAN)) {
+            if (Type.BOOLEAN != this.test.typeOf(ctxt, locals)) {
                 ctxt.report( new Failure( "IfBoolean" ));
             }
         }catch (Failure f) {

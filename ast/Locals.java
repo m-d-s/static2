@@ -33,17 +33,21 @@ public class Locals extends InitStmt {
         }
     }
 
-    public TypeEnv check(Context ctxt, TypeEnv locals)
+    /** Type check this statement, using the specified context, with
+     *  the given initial typing environment, and returning the typing
+     *  environment for a following statement.
+     */ 
+   public TypeEnv check(Context ctxt, TypeEnv locals)
         throws Failure {
         for( int i=0; i<vars.length; ++i ) {
+            //check for redefined locals variable in declaration
             for(int j=0; j<i; ++j) {
-                //check for redefined locals variable in declaration
-                if( vars[i].name.equals(vars[j].name) ) {
+                if( this.vars[i].name.equals(this.vars[j].name) ) {
                     throw new Failure("LocalsUnique");
                 }
             }
             //extend local environment
-           locals = vars[i].extendLocalEnv(ctxt, type, locals);
+           locals = this.vars[i].extendLocalEnv(ctxt, this.type, locals);
         }
         return locals;      
     }

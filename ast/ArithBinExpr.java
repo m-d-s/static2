@@ -10,40 +10,42 @@ public abstract class ArithBinExpr extends BinExpr {
     public ArithBinExpr(Expr left, Expr right) {
         super(left, right);
     }
-
-    public Type typeOf(Context ctxt, TypeEnv locals)
+    
+     /** Calculate the type of this expression, using the given context
+      *  and type environment.
+      */
+     public Type typeOf(Context ctxt, TypeEnv locals)
             throws Failure {
 
         Type leftType = null, rightType = null;    
        try {
             // Find the type of the left operand
-            leftType = left.typeOf(ctxt, locals); 
+            leftType = this.left.typeOf(ctxt, locals); 
             // Find the type of the right operand
-            rightType = right.typeOf(ctxt, locals);
-            //check for functions with void return types
-            checkForVoidReturn(leftType, rightType);
-            checkForGlobalCall(ctxt);
+            rightType = this.right.typeOf(ctxt, locals);
+            //error checks
+            this.checkForVoidReturn(leftType, rightType);
+            this.checkForGlobalCall(ctxt);
             //if either type is BOOLEAN, report an error
-            if( Type.INT != leftType && Type.DOUBLE != leftType ||
-                Type.INT != rightType && Type.DOUBLE != rightType ) {
+            if( !leftType.isNumeric() || !rightType.isNumeric() ) {
                 ctxt.report( new Failure( "ArithBinArgsNumeric" ) );
             }
         } catch ( Failure f ) {
             ctxt.report(f);
         }
         
-         // Check to see if there is a numeric type mismatch
+         // Check for numeric type mismatch and cast accordingly
         if ( Type.INT == leftType && Type.DOUBLE == rightType ) {
-            left =  new IntToDouble(left);
+            this.left =  new IntToDouble(this.left);
         }
         else if(Type.DOUBLE == leftType && Type.INT == rightType) {
-            right = new IntToDouble(right);
+            this.right = new IntToDouble(this.right);
         }
-        //if either type is of type double, return type double
+        
         if( Type.DOUBLE == leftType || Type.DOUBLE == rightType ) {
-            return type=Type.DOUBLE;
+            return this.type=Type.DOUBLE;
         }
-        return type = Type.INT;
+        return this.type = Type.INT;
     }
 
 }

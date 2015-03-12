@@ -64,12 +64,13 @@ public class Context {
         isGlobal = false;
         Function mainFunc;
         FunctionEnv.check(this, functions);
-        // Check for main function:
+        // Check for main function
         FunctionEnv main = FunctionEnv.find("main", functions);
         if (main==null) {
             report(new Failure("MainDefined"));
         }
         else {
+            //check validity of main declaration
             mainFunc = main.getFunction();
             if( !mainFunc.compareRetType(null) ) {
                 report( new Failure("MainVoid") );

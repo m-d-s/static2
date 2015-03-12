@@ -34,7 +34,7 @@ public class Return extends Stmt {
 
         try{
             if( null != exp ) {
-                type = exp.typeOf(ctxt, locals);
+                type = this.exp.typeOf(ctxt, locals);
             }
         }catch( Failure f ) {
             ctxt.report( f );
@@ -43,20 +43,20 @@ public class Return extends Stmt {
        //check for numeric type mismatch and cast accordingly
         if( Type.INT == type && Type.DOUBLE == retType ) {
             type = Type.DOUBLE;
-            exp = new IntToDouble(exp);
+            this.exp = new IntToDouble(this.exp);
         }
         else if( Type.DOUBLE == type && Type.INT == retType ) {
             type = Type.INT;
-            exp = new DoubleToInt(exp);
+            this.exp = new DoubleToInt(this.exp);
         }
         
         //check if non void return is expected
-        if( null == exp && null != retType ) {
+        if( null == this.exp && null != retType ) {
             ctxt.report( new Failure("ReturnValueRequired") );
             return locals;
         }
         //check if void return type is expected
-        else if( null != exp && null == retType ) {
+        else if( null != this.exp && null == retType ) {
             if( exp instanceof Call ) {
                 ctxt.report( new Failure("CallReturnType") );
             }

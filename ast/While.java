@@ -40,13 +40,13 @@ public class While extends Stmt {
         TypeEnv inner = locals;
         try {
             //check to ensure boolean test type
-            if (!test.typeOf(ctxt, locals).equals(Type.BOOLEAN))
+            if (Type.BOOLEAN != this.test.typeOf(ctxt, locals))
                 ctxt.report( new Failure( "WhileBoolean" ));
         }catch (Failure f) {
             ctxt.report(f);
         }
         //check to verify validity of inner statements
-        inner = body.check(ctxt, inner);
+        inner = this.body.check(ctxt, inner);
         return locals;
     }
 

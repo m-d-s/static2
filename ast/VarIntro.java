@@ -35,7 +35,10 @@ public class VarIntro {
         ctxt.report(new Failure("GlobalsInitialized"));
     }
 
+    /** Extend the local environment in the given context with an entry
+     * for the variable that is introduced here
+     */
     TypeEnv extendLocalEnv( Context ctxt, Type type, TypeEnv locals ) {
-        return new TypeEnv(name, type, locals);
+        return new TypeEnv(this.name, type, locals);
     }
 }

@@ -11,6 +11,9 @@ public abstract class RelBinExpr extends BinExpr {
         super(left, right);
     }
 
+    /** Calculate the type of this expression, using the given context
+     *  and type environment.
+     */ 
     public Type typeOf(Context ctxt, TypeEnv locals)
             throws Failure {
 
